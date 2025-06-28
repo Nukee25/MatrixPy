@@ -1,6 +1,3 @@
-from unittest import result
-
-
 class Matrix:
     """
     A class to represent a mathematical matrix and perform basic operations.
@@ -32,7 +29,6 @@ class Matrix:
         self.rows = rows
         self.columns = columns
         self.matrix = []
-        return None
 
     def read(self):
         """
@@ -108,17 +104,37 @@ class Matrix:
                 row.append(int(self.matrix[i][j]) - int(other.matrix[i][j]))
             result.matrix.append(row)
         return result
-    # def __mul__(self, other):
-    #     if self.columns != other.rows or self.rows != other.columns:
-    #         print("Don't know much about matrix, eh?")
-    #         exit(1)
-    #     result = Matrix(self.rows, other.columns)
-    #     for i in range():
+    def __mul__(self, other):
+        """
+            Multiplies two matrices.
+
+            Args:
+                other (Matrix): The matrix to multiply with.
+
+            Returns:
+                Matrix: A new Matrix object containing the product.
+
+            Raises:
+                SystemExit: If the matrix dimensions are incompatible for multiplication.
+        """
+        if self.columns != other.rows or self.rows != other.columns:
+            print("Don't know much about matrix, eh?")
+            exit(1)
+        result = Matrix(self.rows, other.columns)
+        for i in range(self.rows):
+            templ = []
+            for j in range(other.columns):
+                temp = 0.0
+                for k in range(self.columns):
+                    temp += self.matrix[i][k] * other.matrix[k][j]
+                templ.append(temp)
+            result.matrix.append(templ)
+        return result
 new = Matrix(2,2)
 new.read()
 new.display()
 new+=new
 new.display()
-new-=new
+new*=new
 new.display()
             
